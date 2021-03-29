@@ -1,6 +1,8 @@
-import { LogoText, MenuItemText } from 'components/typography'
+import { CopyrightText, LogoText, MenuItemText } from 'components/typography'
+import { BLTrianglePolygon } from 'components/svgs/polygons'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import Link from 'next/link'
 import { GiCubes } from 'react-icons/gi'
 import { ImParagraphLeft } from 'react-icons/im'
 import { MdGames } from 'react-icons/md'
@@ -13,7 +15,7 @@ const LogoContainer = (props) => (
 		className="
         flex flex-row justify-center
         bg-main-variation h-full
-        md:bg-opacity-0 md:h-auto
+        md:bg-opacity-0 md:h-auto md:px-8
         "
 	>
 		{props.children}
@@ -21,26 +23,8 @@ const LogoContainer = (props) => (
 )
 
 const Logo = (props) => (
-	<div className="hidden md:block">
+	<div className="hidden">
 		<Image src="/logo.png" width="48px" height="48px"></Image>
-	</div>
-)
-
-const SidebarPolygon1 = (props) => (
-	<div
-		className="
-        hidden
-        md:block
-        "
-	>
-		<svg
-			className="
-            absolute bottom-0 right-0 text-main-regular fill-current
-            "
-			height="80"
-		>
-			<path d="m 0 84 l 334 0 l 0 -84 z " />
-		</svg>
 	</div>
 )
 
@@ -48,7 +32,7 @@ const SidebarBackground = (props) => (
 	<div
 		className="
         text-accent-lighter relative
-        md:h-screen md:w-64 md:py-28 md:pb-48 md:bg-main-dark
+        md:h-screen md:py-28 md:pb-48 md:bg-main-dark
         "
 	>
 		{props.children}
@@ -71,7 +55,7 @@ const SidebarMenuContainer = (props) => (
 		className="
         flex 
         bg-main-dark pb-2 pt-3 justify-around px-8
-        md:flex-col md:h-full md:bg-opacity-0 md:justify-center md:pb-0 md:pt-0 md:px-0
+        md:flex-col md:h-full md:bg-opacity-0 md:justify-center md:align-middle md:pb-0 md:pt-0 md:px-0 md:mt-8
         "
 	>
 		{props.children}
@@ -81,39 +65,39 @@ const SidebarMenuContainer = (props) => (
 const MenuItem = (props) => {
 	const router = useRouter()
 	return (
-		<div
-			className={
-				router.pathname.startsWith('/' + props.option)
-					? 'text-accent-light md:text-light md:bg-main-regular'
-					: 'hover:bg-accent-regular'
-			}
-		>
-			<MenuItemText>
+		<Link href={'/' + props.option}>
+			<div
+				className={
+					'group cursor-pointer ' +
+					(router.pathname.startsWith('/' + props.option)
+						? 'text-accent-light md:text-light md:bg-main-regular'
+						: 'hover:bg-accent-regular')
+				}
+			>
 				<div
-					className="
-                    flex
-                    flex-col-reverse px-3 items-center
-                    md:flex-row md:px-0 md:justify-end
-                    "
+					className={
+						MenuItemText + 'flex flex-col-reverse px-3 items-center md:flex-row md:px-0 md:justify-end'
+					}
 				>
-					{props.option}
+					<div className="group-hover:underline">{props.option}</div>
 					{props.children}
 				</div>
-			</MenuItemText>
-		</div>
+			</div>
+		</Link>
 	)
 }
 
-interface SidebarProps {}
-
-export default function Sidebar(props: SidebarProps) {
+export default function Sidebar(props) {
 	return (
 		<SidebarBackground>
-			<SidebarPolygon1 />
+			<div className="hidden md:block">
+				<BLTrianglePolygon height="250" width="730" heightOffset="220" />
+				<div className={CopyrightText}>© Gakutech 2021</div>
+			</div>
 			<SidebarContainer>
 				<LogoContainer>
 					<Logo />
-					<LogoText />
+					<div className={LogoText}>Gakutech</div>
 				</LogoContainer>
 				<SidebarMenuContainer>
 					<MenuItem option="blog">

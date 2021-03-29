@@ -16,6 +16,8 @@ module.exports = {
 			content: ['Overpass', 'serif'],
 			menu: ['Titillium Web', 'serif'],
 			logo: ['Major Mono Display', 'sans-serif'],
+			cardtitle: ['Dosis', 'serif'],
+			cardbody: ['Overpass', 'serif'],
 		},
 	},
 	variants: {
