@@ -62,7 +62,11 @@ const SidebarMenuContainer = (props) => (
 	</div>
 )
 
-const MenuItem = (props) => {
+interface MenuItemProps {
+    option: string;
+}
+
+const MenuItem: React.FC<MenuItemProps> = (props) => {
 	const router = useRouter()
 	return (
 		<Link href={'/' + props.option}>
@@ -87,7 +91,7 @@ const MenuItem = (props) => {
 	)
 }
 
-export default function Sidebar(props) {
+export default function Sidebar(props: {}) {
 	return (
 		<SidebarBackground>
 			<div className="hidden md:block">
