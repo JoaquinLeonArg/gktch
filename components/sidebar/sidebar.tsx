@@ -63,7 +63,7 @@ const SidebarMenuContainer = (props) => (
 )
 
 interface MenuItemProps {
-    option: string;
+	option: string
 }
 
 const MenuItem: React.FC<MenuItemProps> = (props) => {
